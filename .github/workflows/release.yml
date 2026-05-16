@@ -19,6 +19,10 @@ on:
         required: false
         type: string
         default: ''
+      node-version:
+        required: false
+        type: string
+        default: 'lts/*'
 
 jobs:
   release:
@@ -31,9 +35,10 @@ jobs:
 
     steps:
       - name: Setup JS
-        uses: sxzz/workflows/setup-js@main
+        uses: OSpoon/workflows/setup-js@main
         with:
           fetch-all: true
+          node-version: ${{ inputs.node-version }}
 
       - name: Generate GitHub Changelog
         run: pnpx changelogithub
