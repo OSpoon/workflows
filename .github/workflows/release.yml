@@ -51,6 +51,10 @@ jobs:
         run: ${{ inputs.build }}
         if: ${{ inputs.build && inputs.publish }}
 
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@latest
+        if: ${{ inputs.publish }}
+
       - name: Publish to NPM
         run: pnpm -r publish --access public --no-git-checks ${{ inputs['tag'] && format('--tag {0}', inputs['tag']) || '' }}
         if: ${{ inputs.publish }}
